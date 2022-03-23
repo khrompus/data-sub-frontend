@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import './CardForm.css'
 // import api from "../api";
 import {sendCard} from "../api";
+import Input from '@mui/material/Input';
+
+const ariaLabel = {'aria-label': 'description'};
 
 function CardForm() {
     const [number, setNumber] = useState('')
@@ -91,7 +94,7 @@ function CardForm() {
         if (e.target.value === '' || re.test(e.target.value)) {
             setNumber(e.target.value)
         }
-        if (e.target.value.length < 16) {
+        if ((e.target.value.length < 16)) {
             setNumberError('Поле заполненено не правильно')
         } else {
             setNumberError('')
@@ -122,62 +125,70 @@ function CardForm() {
 
 
     return (
-        <form onSubmit={handleSubmit} className='form'>
+        <form onSubmit={handleSubmit} noValidate className='form'>
             <div className='form__input-content'>
                 <p className='form__title'>Введите сумму</p>
-                <input className='form__input'
-                       type='tel'
-                       value={amount}
-                       name='amount'
-                       onChange={e => amountHandler(e)}
-                       onBlur={e => blurHandler(e)}
-                       placeholder="AMOUNT"
-                       required
+                <Input
+                    type='tel'
+                    value={amount}
+                    name='amount'
+                    onChange={e => amountHandler(e)}
+                    onBlur={e => blurHandler(e)}
+                    placeholder="AMOUNT"
+                    required
+                    inputProps={ariaLabel}
+                    error={amountError}
+
                 />
+
                 {(amountDirty && amountError) && <div style={{color: 'red'}}>{amountError}</div>}
             </div>
 
             <div className='form__input-content'>
                 <p className='form__title'>Введите номер карты</p>
-                <input className="form__input"
-                       type='text'
-                       value={number}
-                       name='number'
-                       onChange={e => numberHandler(e)}
-                       onBlur={e => blurHandler(e)}
-                       placeholder="0000000000000000"
-                       maxLength='16'
-                       required
+                <Input
+                    type='text'
+                    value={number}
+                    name='number'
+                    onChange={e => numberHandler(e)}
+                    onBlur={e => blurHandler(e)}
+                    placeholder="0000000000000000"
+                    required
+                    inputProps={{ariaLabel, maxLength: 16}}
+                    error={numberError}
                 />
                 {(numberDirty && numberError) && <div style={{color: 'red'}}>{numberError}</div>}
             </div>
 
             <div className='form__input-content'>
                 <p className='form__title'>Введите дату истечения срока карты</p>
-                <input className='form__input'
-                       type='text'
-                       value={expiry}
-                       name='expiry'
-                       onChange={e => formatString(e)}
-                       onBlur={e => blurHandler(e)}
-                       placeholder="MM/YYYY"
-                       maxLength='7'
-                       required
+                <Input
+                    type='text'
+                    value={expiry}
+                    name='expiry'
+                    onChange={e => formatString(e)}
+                    onBlur={e => blurHandler(e)}
+                    placeholder="MM/YYYY"
+                    inputProps={{ariaLabel, maxLength: 7}}
+                    error={expiryError}
+                    required
                 />
                 {(expiryDirty && expiryError) && <div style={{color: 'red'}}>{expiryError}</div>}
             </div>
 
             <div className='form__input-content'>
                 <p className='form__title'>Введите cvv карты</p>
-                <input className='form__input'
-                       type='tel'
-                       value={cvv}
-                       name='cvv'
-                       onChange={e => cvvHandler(e)}
-                       onBlur={e => blurHandler(e)}
-                       placeholder="CVV"
-                       maxLength="3"
-                       required
+                <Input
+                    type='tel'
+                    value={cvv}
+                    name='cvv'
+                    onChange={e => cvvHandler(e)}
+                    onBlur={e => blurHandler(e)}
+                    placeholder="CVV"
+                    maxLength="3"
+                    required
+                    inputProps={{ariaLabel, maxLength: 3}}
+                    error={cvvError}
                 />
                 {(cvvDirty && cvvError) && <div style={{color: 'red'}}>{cvvError}</div>}
             </div>
