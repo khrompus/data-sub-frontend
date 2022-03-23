@@ -1,5 +1,5 @@
-import Header from "./Header/header";
 import './App.css';
+import Header from "./Header/header";
 import CardForm from "./CardForm/CardForm";
 
 function App() {
@@ -7,7 +7,6 @@ function App() {
     <div className="App">
     <Header/>
     <CardForm/>
-    {/*<FormPropsTextFields />*/}
     </div>
   );
 }

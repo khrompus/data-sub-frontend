@@ -4,7 +4,7 @@ import './CardForm.css'
 import {sendCard} from "../api";
 import Input from '@mui/material/Input';
 
-const ariaLabel = {'aria-label': 'description'};
+const label = {'aria-label': 'description'};
 
 function CardForm() {
     const [number, setNumber] = useState('')
@@ -136,7 +136,7 @@ function CardForm() {
                     onBlur={e => blurHandler(e)}
                     placeholder="AMOUNT"
                     required
-                    inputProps={ariaLabel}
+                    inputProps={label}
                     error={amountError}
 
                 />
@@ -152,9 +152,9 @@ function CardForm() {
                     name='number'
                     onChange={e => numberHandler(e)}
                     onBlur={e => blurHandler(e)}
-                    placeholder="0000000000000000"
+                    placeholder="Card number"
                     required
-                    inputProps={{ariaLabel, maxLength: 16}}
+                    inputProps={{label, maxLength: 16}}
                     error={numberError}
                 />
                 {(numberDirty && numberError) && <div style={{color: 'red'}}>{numberError}</div>}
@@ -169,7 +169,7 @@ function CardForm() {
                     onChange={e => formatString(e)}
                     onBlur={e => blurHandler(e)}
                     placeholder="MM/YYYY"
-                    inputProps={{ariaLabel, maxLength: 7}}
+                    inputProps={{label, maxLength: 7}}
                     error={expiryError}
                     required
                 />
@@ -187,7 +187,7 @@ function CardForm() {
                     placeholder="CVV"
                     maxLength="3"
                     required
-                    inputProps={{ariaLabel, maxLength: 3}}
+                    inputProps={{label, maxLength: 3}}
                     error={cvvError}
                 />
                 {(cvvDirty && cvvError) && <div style={{color: 'red'}}>{cvvError}</div>}
